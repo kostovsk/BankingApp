@@ -3,13 +3,17 @@
 }
 
 <div class="text-center">
-    <div id="loginForm">
+    <div id="login">
         <input type="submit" value="Log In" id="login-form" onclick="openInputField()" />
-        <form action="javascript:void(0);" method="POST" onsubmit="">
-            <input type="hidden" id="email" />
-            <input type="hidden" id="password" />
-            <input type="hidden" id="login-btn" />
-        </form>
+        <div id="loginForm" style="display:none">
+            <form action="javascript:void(0);" method="POST" onsubmit="">
+                <label>Email: </label>
+                <input type="text" id="email"><br />
+                <label>Password: </label>
+                <input type="text" id="password"><br />
+                <input type="submit" id="login-btn" value="Log In">
+            </form>
+        </div>
     </div>
     <br />
     <div id="createUser">
@@ -17,22 +21,4 @@
     </div>
 </div>
 
-<script src="Views/Home/Index.js" asp-append-version="true"></script>
-<script>
-    function openInputField() {
-        var loginForm = document.getElementById('login-form');
-        loginForm.setAttribute('type', 'hidden');
-
-        var createUserBtn = document.getElementById('create-btn');
-        createUserBtn.setAttribute('type', 'hidden');
-
-        var inputEmail = document.getElementById('email');
-        inputEmail.setAttribute('type', 'text');
-
-        var inputPassword = document.getElementById('password');
-        inputPassword.setAttribute('type', 'text');
-
-        var loginBtn = document.getElementById('login-btn');
-        loginBtn.setAttribute('type', 'submit');
-    }
-</script>
+<script src="~/js/index.js" asp-append-version="true"></script>
