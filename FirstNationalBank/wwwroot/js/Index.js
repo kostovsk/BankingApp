@@ -7,3 +7,11 @@
 
     document.getElementById('loginForm').style.display = 'block';
 }
+
+function redirectToProfilePage() {
+    document.location = 'Profile/ProfilePage';
+}
+
+function redirectToCreateAccount() {
+    document.location = 'Create/CreateAccount';
+}
