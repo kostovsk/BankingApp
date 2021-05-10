@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="text-center">
+        <div id="login">
+            <input type="submit" value="Log In" id="login-form" onclick="openInputField()" />
+            <div id="loginForm" style="display:none">
+                <form action="javascript:void(0);" method="POST" onsubmit="redirectToProfilePage()">
+                    <label>Email: </label>
+                    <input type="text" id="email"><br />
+                    <label>Password: </label>
+                    <input type="text" id="password"><br />
+                    <input type="submit" id="login-btn" value="Log In">
+                </form>
+            </div>
+        </div>
+        <br />
+        <div id="createUser">
+            <input type="submit" value="Create User" id="create-btn" onclick="redirectToCreateAccount()" />
+        </div>
+    </div>
+
+    <script src="~/js/index.js" asp-append-version="true"></script>
+</body>
+</html>
