@@ -12,5 +12,7 @@ namespace FirstNationalBank.Data
       public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
       public DbSet<BankAccount> BankAccounts { get; set; }
+      public DbSet<Person> Persons { get; set; }
+      public DbSet<Transaction> Transactions { get; set; }
    }
 }

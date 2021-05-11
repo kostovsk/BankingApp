@@ -9,9 +9,9 @@
 }
 
 function redirectToProfilePage() {
-    document.location = 'Profile/ProfilePage';
+    document.location = 'Profile';
 }
 
 function redirectToCreateAccount() {
-    document.location = 'Create/CreateAccount';
+    document.location = 'Create';
 }

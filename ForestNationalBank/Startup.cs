@@ -28,12 +28,8 @@ namespace ForestNationalBank
       // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
       {
-         services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("BankAccounts"));
+         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
          services.AddControllers();
-         services.AddSwaggerGen(c =>
-         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "ForestNationalBank", Version = "v1" });
-         });
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,11 +38,11 @@ namespace ForestNationalBank
          if (env.IsDevelopment())
          {
             app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ForestNationalBank v1"));
          }
 
          app.UseHttpsRedirection();
+         app.UseDefaultFiles();
+         app.UseStaticFiles();
 
          app.UseRouting();
 
