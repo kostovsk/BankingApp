@@ -8,7 +8,7 @@
 <p>We create an account here</p>
 
 <div id="inputForm">
-    <form action="javascript:void(0);" method="POST" onsubmit="">
+    <form action="javascript:void(0);" method="POST" onsubmit="addAccount()">
         <label>Name: </label>
         <input type="text" id="add-name" /><br />
         <label>Address: </label>
@@ -21,7 +21,9 @@
         <input type="text" id="add-email" /><br />
         <label>Password: </label>
         <input type="text" id="add-password" /><br />
-        <input type="hidden" id="add-balance" value="0" />
-        <input type="submit" id="create-btn" value="Create" onclick="" />
+        <input type="hidden" id="add-balance" value="0.00" />
+        <button type="submit" id="create-btn" onclick="test()">Create</button>
     </form>
 </div>
+
+<script src="~/js/create.js" asp-append-version="true"></script>
