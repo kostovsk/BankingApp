@@ -42,8 +42,13 @@ function addAccount() {
         .then(response => response.json())
         .then(() => {
             //getItems();
-            // TODO new function redirect with post call to person controller
+            // TODO new function redirect to profile page
+            name.value = '';
+            address.value = '';
             account.value = '';
+            phone.value = '';
+            email.value = '';
+            password.value = '';
             balance.value = '';
         })
         .catch(error => console.error('Unable to add account.', error));

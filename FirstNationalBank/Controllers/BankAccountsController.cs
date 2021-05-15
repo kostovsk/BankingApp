@@ -85,6 +85,11 @@ namespace FirstNationalBank.Controllers
       public async Task<ActionResult<BankAccount>> PostBankAccount(WrapperForAPIRequest newAccount)
       {
          _context.BankAccounts.Add(newAccount.bankAccount);
+
+         // TODO add account id to person
+         newAccount.person.Acct_Id = 1;
+
+         _context.Persons.Add(newAccount.person);
          await _context.SaveChangesAsync();
 
          return CreatedAtAction("GetBankAccount", new { id = newAccount.bankAccount.Id }, newAccount.bankAccount);
