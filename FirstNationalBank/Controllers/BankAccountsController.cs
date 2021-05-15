@@ -21,6 +21,12 @@ namespace FirstNationalBank.Controllers
          _context = context;
       }
 
+      public class WrapperForAPIRequest
+      {
+         public BankAccount bankAccount { get; set; }
+         public Person person { get; set; }
+      }
+
       // GET: api/BankAccounts
       [HttpGet]
       public async Task<ActionResult<IEnumerable<BankAccount>>> GetBankAccounts()
@@ -76,12 +82,12 @@ namespace FirstNationalBank.Controllers
       // POST: api/BankAccounts
       // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
       [HttpPost]
-      public async Task<ActionResult<BankAccount>> PostBankAccount(BankAccount bankAccount)
+      public async Task<ActionResult<BankAccount>> PostBankAccount(WrapperForAPIRequest newAccount)
       {
-         _context.BankAccounts.Add(bankAccount);
+         _context.BankAccounts.Add(newAccount.bankAccount);
          await _context.SaveChangesAsync();
 
-         return CreatedAtAction("GetBankAccount", new { id = bankAccount.Id }, bankAccount);
+         return CreatedAtAction("GetBankAccount", new { id = newAccount.bankAccount.Id }, newAccount.bankAccount);
       }
 
       // DELETE: api/BankAccounts/5

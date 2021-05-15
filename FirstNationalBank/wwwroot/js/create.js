@@ -26,13 +26,18 @@ function addAccount() {
         password: password.value.trim()
     }
 
+    const newAccount = {
+        bankAccount: bankAccount,
+        person: person
+    }
+
     fetch(uri, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bankAccount)
+        body: JSON.stringify(newAccount)
     })
         .then(response => response.json())
         .then(() => {
