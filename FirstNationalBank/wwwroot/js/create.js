@@ -1,4 +1,4 @@
-﻿const uri = 'https://localhost:44330/api/BankAccountsController';
+﻿const uri = 'https://localhost:44330/api/BankAccounts';
 
 function addAccount() {
     const name = document.getElementById('add-name');
@@ -14,6 +14,9 @@ function addAccount() {
         number: account.value.trim(),
         balance: parseFloat(balance.value)
     };
+
+    //number: account.value.trim(),
+    //balance: parseFloat(balance.value)
 
     const person = {
         name: name.value.trim(),
@@ -34,7 +37,9 @@ function addAccount() {
         .then(response => response.json())
         .then(() => {
             //getItems();
-            name.value = '';
+            // TODO new function redirect with post call to person controller
+            account.value = '';
+            balance.value = '';
         })
         .catch(error => console.error('Unable to add account.', error));
 }
