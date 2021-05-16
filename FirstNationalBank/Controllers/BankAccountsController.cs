@@ -27,6 +27,8 @@ namespace FirstNationalBank.Controllers
          public Person person { get; set; }
       }
 
+      public IList<BankAccount> accounts { get; set; }
+
       // GET: api/BankAccounts
       [HttpGet]
       public async Task<ActionResult<IEnumerable<BankAccount>>> GetBankAccounts()
@@ -85,13 +87,29 @@ namespace FirstNationalBank.Controllers
       public async Task<ActionResult<BankAccount>> PostBankAccount(WrapperForAPIRequest newAccount)
       {
          _context.BankAccounts.Add(newAccount.bankAccount);
-
-         // TODO add account id to person
-         newAccount.person.Acct_Id = 1;
-
-         _context.Persons.Add(newAccount.person);
          await _context.SaveChangesAsync();
 
+         accounts = await _context.BankAccounts.ToListAsync();
+
+         int id = 0;
+
+         foreach (var item in accounts)
+         {
+            if (string.Equals(item.Number, newAccount.bankAccount.Number))
+            {
+               id = item.Id;
+            }
+         }
+         // TODO add account id to person
+
+         if (id != 0)
+         {
+            newAccount.person.Acct_Id = id;
+
+            _context.Persons.Add(newAccount.person);
+            await _context.SaveChangesAsync();
+         }
+         
          return CreatedAtAction("GetBankAccount", new { id = newAccount.bankAccount.Id }, newAccount.bankAccount);
       }
 
