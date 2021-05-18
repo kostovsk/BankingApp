@@ -102,7 +102,10 @@ namespace FirstNationalBank.Controllers
          }
          // TODO add account id to person
 
-         if (id != 0)
+         Guid obj = Guid.NewGuid();
+         var something = obj;
+
+         if (id != 0 || accounts.Count == 1)
          {
             newAccount.person.Acct_Id = id;
 

@@ -40,10 +40,11 @@ function addAccount() {
         body: JSON.stringify(newAccount)
     })
         .then(response => response.json())
+        .then(data => _displayData(data))
         .then(() => {
             //getItems();
             // TODO new function redirect to profile page
-            name.value = '';
+            //name.value = '';
             address.value = '';
             account.value = '';
             phone.value = '';
@@ -52,6 +53,11 @@ function addAccount() {
             balance.value = '';
         })
         .catch(error => console.error('Unable to add account.', error));
+}
+
+function _displayData(data) {
+    const name = document.getElementById('add-name');
+    name.value = data.number;
 }
 
 function test() {
