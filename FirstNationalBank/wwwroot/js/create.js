@@ -15,8 +15,6 @@ function addAccount() {
         balance: parseFloat(balance.value)
     };
 
-    //number: account.value.trim(),
-    //balance: parseFloat(balance.value)
 
     const person = {
         name: name.value.trim(),
@@ -40,24 +38,30 @@ function addAccount() {
         body: JSON.stringify(newAccount)
     })
         .then(response => response.json())
-        .then(data => _displayData(data))
+        .then(data => redirectToProfilePage(data))
         .then(() => {
-            //getItems();
-            // TODO new function redirect to profile page
-            //name.value = '';
-            address.value = '';
-            account.value = '';
-            phone.value = '';
-            email.value = '';
-            password.value = '';
-            balance.value = '';
         })
         .catch(error => console.error('Unable to add account.', error));
 }
 
-function _displayData(data) {
+function redirectToProfilePage(data) {
     const name = document.getElementById('add-name');
-    name.value = data.number;
+    const address = document.getElementById('add-address');
+    const account = document.getElementById('add-account');
+    const phone = document.getElementById('add-phone');
+    const email = document.getElementById('add-email');
+    const password = document.getElementById('add-password');
+    const balance = document.getElementById('add-balance');
+
+    name.value = '';
+    address.value = '';
+    account.value = '';
+    phone.value = '';
+    email.value = '';
+    password.value = '';
+    balance.value = '';
+
+    window.location.replace('https://localhost:44330/Profile/ProfilePage/' + data.id);
 }
 
 function test() {

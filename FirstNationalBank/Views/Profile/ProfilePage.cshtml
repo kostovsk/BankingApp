@@ -6,3 +6,14 @@
 <h1>ProfilePage</h1>
 
 <p>This is the profile page</p>
+<label>ID: </label>
+<input type="text" id="add-id" />
+<br />
+
+
+<script>
+    var url = document.URL;
+    var id = url.substring(url.lastIndexOf('/') + 1);
+    const changeid = document.getElementById('add-id');
+    changeid.value = id;
+</script>
