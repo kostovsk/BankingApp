@@ -38,16 +38,21 @@ namespace FirstNationalBank.Controllers
 
       // GET: api/BankAccounts/5
       [HttpGet("{id}")]
-      public async Task<ActionResult<BankAccount>> GetBankAccount(int id)
+      public async Task<ActionResult<WrapperForAPIRequest>> GetBankAccount(int id)
       {
-         var bankAccount = await _context.BankAccounts.FindAsync(id);
+         var acct = new WrapperForAPIRequest();
 
-         if (bankAccount == null)
+         acct.bankAccount = await _context.BankAccounts.FindAsync(id);
+
+         acct.person = _context.Persons
+            .Single(x => x.Acct_Id == id);
+
+         if (acct == null)
          {
             return NotFound();
          }
 
-         return bankAccount;
+         return acct;
       }
 
       // PUT: api/BankAccounts/5

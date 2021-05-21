@@ -11,7 +11,7 @@
 <br />
 <table>
     <tr>
-        <th></th>
+        <th>User Account</th>
         <th></th>
         <th></th>
     </tr>
@@ -19,15 +19,18 @@
 </table>
 
 
-<script>
-    const uri = 'https://localhost:44330/api/BankAccounts';
+<script type="text/javascript">
+    const nope = 'https://localhost:44330/api/BankAccounts';
+    let account = [];
+
     var url = document.URL;
     var myid = url.substring(url.lastIndexOf('/') + 1);
+    const acctId = parseInt(myid);
+
     const changeid = document.getElementById('add-id');
     changeid.value = myid;
 
-    const acctId = parseInt(myid);
-    getAccount();
+    const uri = ('https://localhost:44330/api/BankAccounts/' + myid);
 
     function getAccount() {
         fetch(uri)
@@ -43,8 +46,37 @@
         let tr = tBody.insertRow();
 
         let td1 = tr.insertCell(0);
-        let textNode1 = document.createTextNode(data.bankAccount.account);
+        let textNode1 = document.createTextNode(data.bankAccount.number);
         td1.appendChild(textNode1);
+
+        let td2 = tr.insertCell(0);
+        let textNode2 = document.createTextNode(data.bankAccount.balance);
+        td2.appendChild(textNode2);
+
+        let td3 = tr.insertCell(0);
+        let textNode3 = document.createTextNode(data.person.name);
+        td3.appendChild(textNode3);
+
+        let td4 = tr.insertCell(0);
+        let textNode4 = document.createTextNode(data.person.address);
+        td4.appendChild(textNode4);
+
+        let td5 = tr.insertCell(0);
+        let textNode5 = document.createTextNode(data.person.phone);
+        td5.appendChild(textNode5);
+
+        let td6 = tr.insertCell(0);
+        let textNode6 = document.createTextNode(data.person.email);
+        td6.appendChild(textNode6);
+
+        let td7 = tr.insertCell(0);
+        let textNode7 = document.createTextNode(data.person.password);
+        td7.appendChild(textNode7);
+
     }
 
+</script>
+
+<script type="text/javascript">
+    getAccount();
 </script>
