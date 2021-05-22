@@ -9,9 +9,27 @@
 <label>ID: </label>
 <input type="text" id="add-id" />
 <br />
+
+<div>
+    <label>User Account:</label>
+    <p id="add-account"></p>
+</div>
+<div>
+    <p id="add-name"></p>
+    <p id="add-address"></p>
+    <p id="add-phone"></p>
+    <p id="add-email"></p>
+</div>
+
+<div>
+    <label>Balance:</label>
+    <p id="add-balance"></p>
+</div>
+
+
 <table>
     <tr>
-        <th>User Account</th>
+        <th></th>
         <th></th>
         <th></th>
     </tr>
@@ -40,38 +58,52 @@
     }
 
     function displayAccount(data) {
-        const tBody = document.getElementById('account');
-        tBody.innerHTML = '';
+        const account = document.getElementById('add-account');
+        const name = document.getElementById('add-name');
+        const address = document.getElementById('add-address');
+        const phone = document.getElementById('add-phone');
+        const email = document.getElementById('add-email');
+        const balance = document.getElementById('add-balance');
 
-        let tr = tBody.insertRow();
+        account.innerHTML = data.bankAccount.number;
+        name.innerHTML = data.person.name;
+        address.innerHTML = data.person.address;
+        phone.innerHTML = data.person.phone;
+        email.innerHTML = data.person.email;
+        balance.innerHTML = data.bankAccount.balance;
 
-        let td1 = tr.insertCell(0);
-        let textNode1 = document.createTextNode(data.bankAccount.number);
-        td1.appendChild(textNode1);
+        //const tBody = document.getElementById('account');
+        //tBody.innerHTML = '';
 
-        let td2 = tr.insertCell(0);
-        let textNode2 = document.createTextNode(data.bankAccount.balance);
-        td2.appendChild(textNode2);
+        //let tr = tBody.insertRow();
 
-        let td3 = tr.insertCell(0);
-        let textNode3 = document.createTextNode(data.person.name);
-        td3.appendChild(textNode3);
+        //let td1 = tr.insertCell(0);
+        //let textNode1 = document.createTextNode(data.bankAccount.number);
+        //td1.appendChild(textNode1);
 
-        let td4 = tr.insertCell(0);
-        let textNode4 = document.createTextNode(data.person.address);
-        td4.appendChild(textNode4);
+        //let td2 = tr.insertCell(0);
+        //let textNode2 = document.createTextNode(data.bankAccount.balance);
+        //td2.appendChild(textNode2);
 
-        let td5 = tr.insertCell(0);
-        let textNode5 = document.createTextNode(data.person.phone);
-        td5.appendChild(textNode5);
+        //let td3 = tr.insertCell(0);
+        //let textNode3 = document.createTextNode(data.person.name);
+        //td3.appendChild(textNode3);
 
-        let td6 = tr.insertCell(0);
-        let textNode6 = document.createTextNode(data.person.email);
-        td6.appendChild(textNode6);
+        //let td4 = tr.insertCell(0);
+        //let textNode4 = document.createTextNode(data.person.address);
+        //td4.appendChild(textNode4);
 
-        let td7 = tr.insertCell(0);
-        let textNode7 = document.createTextNode(data.person.password);
-        td7.appendChild(textNode7);
+        //let td5 = tr.insertCell(0);
+        //let textNode5 = document.createTextNode(data.person.phone);
+        //td5.appendChild(textNode5);
+
+        //let td6 = tr.insertCell(0);
+        //let textNode6 = document.createTextNode(data.person.email);
+        //td6.appendChild(textNode6);
+
+        //let td7 = tr.insertCell(0);
+        //let textNode7 = document.createTextNode(data.person.password);
+        //td7.appendChild(textNode7);
 
     }
 
