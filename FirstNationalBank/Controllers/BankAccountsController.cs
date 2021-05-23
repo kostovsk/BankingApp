@@ -31,9 +31,9 @@ namespace FirstNationalBank.Controllers
 
       // GET: api/BankAccounts
       [HttpGet]
-      public async Task<ActionResult<IEnumerable<BankAccount>>> GetBankAccounts()
+      public async Task<ActionResult<IEnumerable<Person>>> GetBankAccounts()
       {
-         return await _context.BankAccounts.ToListAsync();
+         return await _context.Persons.ToListAsync();
       }
 
       // GET: api/BankAccounts/5
