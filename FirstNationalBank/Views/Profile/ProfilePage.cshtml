@@ -21,13 +21,13 @@
         padding: 8px 0;
     }
 
-    .sidebar a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 16px;
-        color: #2196F3;
-        display: block;
-    }
+        .sidebar a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #2196F3;
+            display: block;
+        }
 
     .header {
         width: 100%;
@@ -60,14 +60,24 @@
 
 <div class="btn-toolbar">
     <div class="btn-group mr-2">
-        <button type="submit" id="deposit">Deposit</button>
+        <button type="submit" id="deposit" onclick="openTransactionForm()">Deposit</button>
     </div>
     <div class="btn-group mr-2">
-        <button type="submit" id="withdrawal">Withdrawal</button>
+        <button type="submit" id="withdrawal" onclick="">Withdrawal</button>
     </div>
     <div class="btn-group mr-2">
-        <button type="submit" id="transactions">Transactions</button>
+        <button type="submit" id="transactions" onclick="getTransactions()">Transactions</button>
     </div>
+</div>
+
+<div id="transactionForm" style="display:none">
+    <form action="javascript:void(0);" method="POST" onsubmit="addTransaction()">
+        <label>Amount: </label>
+        <input type="text" id="amount"><br />
+        <label>Notes: </label>
+        <input type="text" id="notes"><br />
+        <input type="submit" id="submit-btn" value="Complete">
+    </form>
 </div>
 
 <table>
@@ -76,25 +86,59 @@
         <th></th>
         <th></th>
     </tr>
-    <tbody id="account"></tbody>
+    <tbody id="transaction"></tbody>
 </table>
 
 
 <script type="text/javascript">
     const nope = 'https://localhost:44330/api/BankAccounts';
-    let account = [];
+    let transaction = [];
 
     var url = document.URL;
     var myid = url.substring(url.lastIndexOf('/') + 1);
     const acctId = parseInt(myid);
 
     const uri = ('https://localhost:44330/api/BankAccounts/' + myid);
+    const uri2 = ('https://localhost:44330/api/Transactions/' + myid);
 
     function getAccount() {
         fetch(uri)
             .then(response => response.json())
             .then(data => displayAccount(data))
             .catch(error => console.error('Unable to get account.', error));
+    }
+
+    function getTransactions() {
+        fetch(uri2)
+            .then(response => response.json())
+            .then(data => displayTransactions(data))
+            .catch(error => console.error('Unable to get transactions.', error))
+    }
+
+    function addTransaction() {
+        const amount = document.getElementById('amount');
+        const notes = document.getElementById('notes');
+
+        const trans = {
+            amount: parseFloat(amount.value),
+            notes: notes.value,
+            acct_Id: acctId
+        };
+
+        fetch(uri2, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(trans)
+        })
+            .then(response => response.json())
+            .then(() => {
+                closeTransactionForm();
+                getTransactions();
+            })
+            .catch(error => console.error('Unable to add transaction', error));
     }
 
     function displayAccount(data) {
@@ -111,40 +155,36 @@
         phone.innerHTML = data.person.phone;
         email.innerHTML = data.person.email;
         balance.innerHTML = data.bankAccount.balance;
+    }
 
-        //const tBody = document.getElementById('account');
-        //tBody.innerHTML = '';
+    function displayTransactions(data) {
+        const tBody = document.getElementById('transaction');
 
-        //let tr = tBody.insertRow();
+        data.forEach(item => {
+            let tr = tBody.insertRow();
 
-        //let td1 = tr.insertCell(0);
-        //let textNode1 = document.createTextNode(data.bankAccount.number);
-        //td1.appendChild(textNode1);
+            let td1 = tr.insertCell(0);
+            let textNode1 = document.createTextNode(item.amount);
+            td1.appendChild(textNode1);
 
-        //let td2 = tr.insertCell(0);
-        //let textNode2 = document.createTextNode(data.bankAccount.balance);
-        //td2.appendChild(textNode2);
+            let td2 = tr.insertCell(1);
+            let textNode2 = document.createTextNode(item.notes);
+            td2.appendChild(textNode2);
 
-        //let td3 = tr.insertCell(0);
-        //let textNode3 = document.createTextNode(data.person.name);
-        //td3.appendChild(textNode3);
+            let td3 = tr.insertCell(2);
+            let textNode3 = document.createTextNode(item.date);
+            td3.appendChild(textNode3);
+        });
 
-        //let td4 = tr.insertCell(0);
-        //let textNode4 = document.createTextNode(data.person.address);
-        //td4.appendChild(textNode4);
+        transaction = data;
+    }
 
-        //let td5 = tr.insertCell(0);
-        //let textNode5 = document.createTextNode(data.person.phone);
-        //td5.appendChild(textNode5);
+    function openTransactionForm() {
+        document.getElementById('transactionForm').style.display = 'block';
+    }
 
-        //let td6 = tr.insertCell(0);
-        //let textNode6 = document.createTextNode(data.person.email);
-        //td6.appendChild(textNode6);
-
-        //let td7 = tr.insertCell(0);
-        //let textNode7 = document.createTextNode(data.person.password);
-        //td7.appendChild(textNode7);
-
+    function closeTransactionForm() {
+        document.getElementById('transactionForm').style.display = 'none';
     }
 
 </script>
