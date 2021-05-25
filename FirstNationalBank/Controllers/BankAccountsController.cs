@@ -124,9 +124,6 @@ namespace FirstNationalBank.Controllers
 
             }
 
-
-
-
         }
 
         // DELETE: api/BankAccounts/5
