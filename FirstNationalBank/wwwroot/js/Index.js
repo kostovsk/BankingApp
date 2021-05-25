@@ -20,10 +20,18 @@ function getPerson() {
 function verifyUser(data) {
     var email = document.getElementById('email');
     var password = document.getElementById('password');
-
+    // TODO validate email then nest another if statement to check password
     data.forEach(item => {
         if (item.email === email.value && item.password === password.value) {
-            redirectToProfilePage(item.acct_Id);
+            if (item.password === password.value) {
+                redirectToProfilePage(item.acct_Id);
+            }
+            else {
+                window.alert("Password is incorrect!");
+            }
+        }
+        else {
+            window.alert("User does not exist!");
         }
     });
 }
