@@ -2,11 +2,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="text-center" style="max-width:15rem; margin: 0 auto;">
     <div id="login">
         <input type="submit" value="Log In" id="login-form" onclick="openInputField()" />
         <div id="loginForm" style="display:none">
-            <form action="javascript:void(0);" method="POST" onsubmit="getPerson()">
+            <form action="javascript:void(0);" method="POST" onsubmit="getPerson()" style="display: flex; flex-direction: column;">
                 <label>Email: </label>
                 <input type="text" id="email"><br />
                 <label>Password: </label>

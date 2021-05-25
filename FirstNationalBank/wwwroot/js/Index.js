@@ -20,20 +20,33 @@ function getPerson() {
 function verifyUser(data) {
     var email = document.getElementById('email');
     var password = document.getElementById('password');
+    var user = false;
+    var pass = false;
+    var id = -1;
+
     // TODO validate email then nest another if statement to check password
     data.forEach(item => {
-        if (item.email === email.value && item.password === password.value) {
+        if (item.email === email.value) {
+            user = true;
             if (item.password === password.value) {
-                redirectToProfilePage(item.acct_Id);
+                pass = true;
+                id = item.acct_Id
             }
-            else {
-                window.alert("Password is incorrect!");
-            }
-        }
-        else {
-            window.alert("User does not exist!");
         }
     });
+
+    if (user) {
+        if (pass) {
+            redirectToProfilePage(id);
+        }
+        else {
+            window.alert("Password is incorrect!");
+        }
+    }
+    else {
+        window.alert("User is incorrect!");
+    }
+
 }
 
 function redirectToProfilePage(id) {

@@ -36,6 +36,14 @@
         background: #f8f8f8;
         display: block;
     }
+
+    table,
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
 </style>
 
 <div class="header">
@@ -69,7 +77,7 @@
         <button type="submit" id="transactions" onclick="getTransactions()">Transactions</button>
     </div>
 </div>
-
+<br />
 <div id="transactionForm" style="display:none">
     <form action="javascript:void(0);" method="POST" onsubmit="addTransaction()">
         <label>Amount: </label>
@@ -79,15 +87,18 @@
         <input type="submit" id="submit-btn" value="Complete">
     </form>
 </div>
+<br />
+<div id="table" style="display:none">
+    <table>
+        <tr>
+            <th>Date: </th>
+            <th>Amount: </th>
+            <th>Description: </th>
+        </tr>
+        <tbody id="transaction"></tbody>
+    </table>
 
-<table>
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    <tbody id="transaction"></tbody>
-</table>
+</div>
 
 
 <script type="text/javascript">
@@ -158,21 +169,24 @@
     }
 
     function displayTransactions(data) {
+        document.getElementById('table').style.display = 'block';
+        document.getElementById('transactions').onclick = function () { hideTransactions() };
+
         const tBody = document.getElementById('transaction');
 
         data.forEach(item => {
             let tr = tBody.insertRow();
 
             let td1 = tr.insertCell(0);
-            let textNode1 = document.createTextNode(item.amount);
+            let textNode1 = document.createTextNode(item.date.slice(0, 10));
             td1.appendChild(textNode1);
 
             let td2 = tr.insertCell(1);
-            let textNode2 = document.createTextNode(item.notes);
+            let textNode2 = document.createTextNode(item.amount);
             td2.appendChild(textNode2);
 
             let td3 = tr.insertCell(2);
-            let textNode3 = document.createTextNode(item.date);
+            let textNode3 = document.createTextNode(item.notes);
             td3.appendChild(textNode3);
         });
 
@@ -185,6 +199,14 @@
 
     function closeTransactionForm() {
         document.getElementById('transactionForm').style.display = 'none';
+    }
+
+    function hideTransactions() {
+        const tBody = document.getElementById('transaction');
+        tBody.innerHTML = '';
+
+        document.getElementById('table').style.display = 'none';
+        document.getElementById('transactions').onclick = function () { getTransactions() };
     }
 
 </script>
