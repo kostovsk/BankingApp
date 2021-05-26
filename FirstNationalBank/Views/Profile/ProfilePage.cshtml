@@ -3,7 +3,7 @@
     ViewData["Title"] = "ProfilePage";
 }
 
-<h2>Welcome to your Account!</h2>
+
 
 <style>
     body {
@@ -11,10 +11,10 @@
     }
 
     .sidebar {
-        width: 230px;
+        width: 200px;
         position: fixed;
         z-index: 1;
-        top: 60px;
+        top: 100px;
         left: 10px;
         background: #f8f8f8;
         overflow-x: hidden;
@@ -36,8 +36,18 @@
         background: #f8f8f8;
         display: block;
     }
+    
+    .main {
+        margin-left: 200px;
+        width: 100%;
+        padding: 0px 10px;
+    }
 
-    table,
+    table {
+        table-layout: auto;
+        width: 80%;
+    }
+
     th,
     td {
         padding: 10px;
@@ -45,17 +55,6 @@
         border-collapse: collapse;
     }
 </style>
-
-<div class="header">
-    <h4>User Account:</h4>
-    <a id="add-account"></a>
-</div>
-
-
-<div style="display: inline-block">
-    <h4>Balance:</h4>
-    <a id="add-balance"></a>
-</div>
 
 <div class="sidebar">
     <div>
@@ -66,40 +65,51 @@
     </div>
 </div>
 
-<div class="btn-toolbar">
-    <div class="btn-group mr-2">
-        <button type="submit" id="deposit" onclick="openTransactionForm()">Deposit</button>
+<div class="main">
+    <h2>Welcome to your Account!</h2>
+    <div class="header">
+        <h4>Account Number: <a id="add-account"></a></h4>
     </div>
-    <div class="btn-group mr-2">
-        <button type="submit" id="withdrawal" onclick="">Withdrawal</button>
-    </div>
-    <div class="btn-group mr-2">
-        <button type="submit" id="transactions" onclick="getTransactions()">Transactions</button>
-    </div>
-</div>
-<br />
-<div id="transactionForm" style="display:none">
-    <form action="javascript:void(0);" method="POST" onsubmit="addTransaction()">
-        <label>Amount: </label>
-        <input type="text" id="amount"><br />
-        <label>Notes: </label>
-        <input type="text" id="notes"><br />
-        <input type="submit" id="submit-btn" value="Complete">
-    </form>
-</div>
-<br />
-<div id="table" style="display:none">
-    <table>
-        <tr>
-            <th>Date: </th>
-            <th>Amount: </th>
-            <th>Description: </th>
-        </tr>
-        <tbody id="transaction"></tbody>
-    </table>
 
-</div>
+    <div style="display: inline-block">
+        <h4>Available Balance: <a id="add-balance"></a></h4>
+    </div>
 
+    <div class="btn-toolbar">
+        <div class="btn-group mr-2">
+            <button type="submit" id="deposit" onclick="openTransactionForm()">Deposit</button>
+        </div>
+        <div class="btn-group mr-2">
+            <button type="submit" id="withdrawal" onclick="">Withdrawal</button>
+        </div>
+        <div class="btn-group mr-2">
+            <button type="submit" id="transactions" onclick="getTransactions()">Transactions</button>
+        </div>
+    </div>
+    <br />
+    <div id="transactionForm" style="display:none">
+        <form action="javascript:void(0);" method="POST" onsubmit="addTransaction()">
+            <label>Amount: </label>
+            <input type="text" id="amount"><br />
+            <label>Notes: </label>
+            <input type="text" id="notes"><br />
+            <input type="submit" id="submit-btn" value="Complete">
+        </form>
+    </div>
+    <br />
+    <div id="table" style="display:none">
+        <table>
+            <tr>
+                <th>Date: </th>
+                <th>Type: </th>
+                <th>Amount: </th>
+                <th>Description: </th>
+            </tr>
+            <tbody id="transaction"></tbody>
+        </table>
+
+    </div>
+</div>
 
 <script type="text/javascript">
     const nope = 'https://localhost:44330/api/BankAccounts';
@@ -110,7 +120,7 @@
     const acctId = parseInt(myid);
 
     const uri = ('https://localhost:44330/api/BankAccounts/' + myid);
-    const uri2 = ('https://localhost:44330/api/Transactions/' + myid);
+    const uri2 = ('https://localhost:44330/api/Transactions/');
 
     function getAccount() {
         fetch(uri)
@@ -120,7 +130,7 @@
     }
 
     function getTransactions() {
-        fetch(uri2)
+        fetch(uri2 + myid)
             .then(response => response.json())
             .then(data => displayTransactions(data))
             .catch(error => console.error('Unable to get transactions.', error))
@@ -182,12 +192,16 @@
             td1.appendChild(textNode1);
 
             let td2 = tr.insertCell(1);
-            let textNode2 = document.createTextNode(item.amount);
+            let textNode2 = document.createTextNode("Debit/Credit");
             td2.appendChild(textNode2);
 
             let td3 = tr.insertCell(2);
-            let textNode3 = document.createTextNode(item.notes);
+            let textNode3 = document.createTextNode(parseFloat(item.amount));
             td3.appendChild(textNode3);
+
+            let td4 = tr.insertCell(3);
+            let textNode4 = document.createTextNode(item.notes);
+            td4.appendChild(textNode4);
         });
 
         transaction = data;
