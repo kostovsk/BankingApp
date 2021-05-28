@@ -18,5 +18,8 @@ namespace FirstNationalBank.Models
       public string Type { get; set; }
       public decimal Balance { get; set; }
 
+      public Person Person { get; set; }
+      public List<Transaction> Transactions { get; set; }
+
    }
 }

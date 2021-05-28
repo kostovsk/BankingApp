@@ -14,5 +14,14 @@ namespace FirstNationalBank.Data
       public DbSet<BankAccount> BankAccounts { get; set; }
       public DbSet<Person> Persons { get; set; }
       public DbSet<Transaction> Transactions { get; set; }
+
+      protected override void OnModelCreating(ModelBuilder modelBuilder)
+      {
+         modelBuilder.Entity<BankAccount>()
+            .HasOne(p => p.Person)
+            .WithMany(b => b.BankAccounts);
+      }
+
    }
+
 }

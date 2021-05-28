@@ -23,5 +23,7 @@ namespace FirstNationalBank.Models
       /// </summary>
       public string MMN { get; set; }
       public string Password { get; set; }
+
+      public List<BankAccount> BankAccounts { get; set; }
    }
 }
