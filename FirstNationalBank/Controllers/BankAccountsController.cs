@@ -45,8 +45,7 @@ namespace FirstNationalBank.Controllers
 
             acct.bankAccount = await _context.BankAccounts.FindAsync(id);
 
-            acct.person = _context.Persons
-               .Single(x => x.Acct_Id == id);
+
 
             if (acct == null)
             {
@@ -61,7 +60,7 @@ namespace FirstNationalBank.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBankAccount(int id, BankAccount bankAccount)
         {
-            if (id != bankAccount.Id)
+            if (id != bankAccount.BankAccountId)
             {
                 return BadRequest();
             }
@@ -94,8 +93,15 @@ namespace FirstNationalBank.Controllers
         {
 
 
-            var exists = await _context.Persons.Where(x => x.Name == newAccount.person.Name).FirstOrDefaultAsync();
-            if (exists != null && exists.Id > 0)
+            var exists = await _context.Persons.Where(
+                x =>
+                    x.FirstName == newAccount.person.FirstName
+                     &&
+                     x.LastName == newAccount.person.LastName)
+                .FirstOrDefaultAsync();
+
+
+            if (exists != null && exists.PersonId > 0)
             {
 
                 //TODO: person for the given name, exists in DB
@@ -107,20 +113,13 @@ namespace FirstNationalBank.Controllers
             else
             {
 
+
                 _context.Persons.Add(newAccount.person);
                 await _context.SaveChangesAsync();
 
-                _context.BankAccounts.Add(newAccount.bankAccount);
-                await _context.SaveChangesAsync();
-
-                int id = newAccount.bankAccount.Id;
-                // TODO add account id to person
-
-                newAccount.person.Acct_Id = id;
-                await _context.SaveChangesAsync();
 
 
-                return CreatedAtAction("GetBankAccount", new { id = newAccount.bankAccount.Id }, newAccount.bankAccount);
+                return CreatedAtAction("GetBankAccount", new { id = newAccount.bankAccount.BankAccountId }, newAccount.bankAccount);
 
             }
 
@@ -144,7 +143,7 @@ namespace FirstNationalBank.Controllers
 
         private bool BankAccountExists(int id)
         {
-            return _context.BankAccounts.Any(e => e.Id == id);
+            return _context.BankAccounts.Any(e => e.BankAccountId == id);
         }
     }
 }
