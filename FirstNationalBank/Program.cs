@@ -15,7 +15,6 @@ namespace FirstNationalBank
             using (var scope = host.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.EnsureCreated();
                 dbContext.Database.Migrate();
             }
 
