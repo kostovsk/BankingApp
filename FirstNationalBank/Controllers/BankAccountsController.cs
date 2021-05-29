@@ -42,10 +42,8 @@ namespace FirstNationalBank.Controllers
         public async Task<ActionResult<WrapperForAPIRequest>> GetBankAccount(int id)
         {
             var acct = new WrapperForAPIRequest();
-
-            acct.bankAccount = await _context.BankAccounts.FindAsync(id);
-
-
+            acct.bankAccount = await _context.BankAccounts
+               .SingleAsync(x => x.BankAccountId == id);
 
             if (acct == null)
             {
@@ -91,15 +89,7 @@ namespace FirstNationalBank.Controllers
         [HttpPost]
         public async Task<IActionResult> PostBankAccount(WrapperForAPIRequest newAccount)
         {
-
-
-            var exists = await _context.Persons.Where(
-                x =>
-                    x.FirstName == newAccount.person.FirstName
-                     &&
-                     x.LastName == newAccount.person.LastName)
-                .FirstOrDefaultAsync();
-
+            var exists = await _context.Persons.Where(x => x.Email == newAccount.person.Email).FirstOrDefaultAsync();
 
             if (exists != null && exists.PersonId > 0)
             {
