@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FirstNationalBank.Data;
 using FirstNationalBank.Models;
 
-namespace FirstNationalBank
+namespace FirstNationalBank.Controllers
 {
    [Route("api/[controller]")]
    [ApiController]
@@ -35,7 +35,7 @@ namespace FirstNationalBank
          //var transaction = await _context.Transactions.FindAsync(id);
 
          var transactions = await _context.Transactions
-            .Where(n => n.Acct_Id == id)
+            .Where(n => n.AcctId == id)
             .ToListAsync();
 
          if (transactions == null)
