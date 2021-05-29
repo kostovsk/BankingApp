@@ -11,31 +11,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FirstNationalBank.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BankAccountsController : ControllerBase
-    {
-        private readonly ApplicationDbContext _context;
+   [Route("api/[controller]")]
+   [ApiController]
+   public class BankAccountsController : ControllerBase
+   {
+      private readonly ApplicationDbContext _context;
 
-        public BankAccountsController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+      public BankAccountsController(ApplicationDbContext context)
+      {
+         _context = context;
+      }
 
-        public class WrapperForAPIRequest
-        {
-            public BankAccount bankAccount { get; set; }
-            public Person person { get; set; }
-        }
+      public class WrapperForAPIRequest
+      {
+         public BankAccount bankAccount { get; set; }
+         public Person person { get; set; }
+      }
 
-        public IList<BankAccount> accounts { get; set; }
+      public IList<BankAccount> accounts { get; set; }
 
-        // GET: api/BankAccounts
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetBankAccounts()
-        {
-            return await _context.Persons.ToListAsync();
-        }
+      // GET: api/BankAccounts
+      [HttpGet]
+      public async Task<ActionResult<IEnumerable<Person>>> GetBankAccounts()
+      {
+         return await _context.Persons.ToListAsync();
+      }
 
         // GET: api/BankAccounts/5
         [HttpGet("{id}")]
@@ -50,8 +50,8 @@ namespace FirstNationalBank.Controllers
                 return NotFound();
             }
 
-            return acct;
-        }
+         return acct;
+      }
 
         // PUT: api/BankAccounts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -63,45 +63,45 @@ namespace FirstNationalBank.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(bankAccount).State = EntityState.Modified;
+         _context.Entry(bankAccount).State = EntityState.Modified;
 
-            try
+         try
+         {
+            await _context.SaveChangesAsync();
+         }
+         catch (DbUpdateConcurrencyException)
+         {
+            if (!BankAccountExists(id))
             {
-                await _context.SaveChangesAsync();
+               return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
+            else
             {
-                if (!BankAccountExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+               throw;
             }
+         }
 
-            return NoContent();
-        }
+         return NoContent();
+      }
 
-        // POST: api/BankAccounts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<IActionResult> PostBankAccount(WrapperForAPIRequest newAccount)
-        {
-            var exists = await _context.Persons.Where(x => x.Email == newAccount.person.Email).FirstOrDefaultAsync();
+      // POST: api/BankAccounts
+      // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+      [HttpPost]
+      public async Task<IActionResult> PostBankAccount(WrapperForAPIRequest newAccount)
+      {
+         var exists = await _context.Persons.Where(x => x.Email == newAccount.person.Email).FirstOrDefaultAsync();
 
             if (exists != null && exists.PersonId > 0)
             {
 
                 //TODO: person for the given name, exists in DB
 
-                //return error'
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Customer already exists in database");
-            }
-            else
-            {
+            //return error'
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                "Customer already exists in database");
+         }
+         else
+         {
 
 
                 _context.Persons.Add(newAccount.person);
@@ -111,25 +111,25 @@ namespace FirstNationalBank.Controllers
 
                 return CreatedAtAction("GetBankAccount", new { id = newAccount.bankAccount.BankAccountId }, newAccount.bankAccount);
 
-            }
+         }
 
-        }
+      }
 
-        // DELETE: api/BankAccounts/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBankAccount(int id)
-        {
-            var bankAccount = await _context.BankAccounts.FindAsync(id);
-            if (bankAccount == null)
-            {
-                return NotFound();
-            }
+      // DELETE: api/BankAccounts/5
+      [HttpDelete("{id}")]
+      public async Task<IActionResult> DeleteBankAccount(int id)
+      {
+         var bankAccount = await _context.BankAccounts.FindAsync(id);
+         if (bankAccount == null)
+         {
+            return NotFound();
+         }
 
-            _context.BankAccounts.Remove(bankAccount);
-            await _context.SaveChangesAsync();
+         _context.BankAccounts.Remove(bankAccount);
+         await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+         return NoContent();
+      }
 
         private bool BankAccountExists(int id)
         {
