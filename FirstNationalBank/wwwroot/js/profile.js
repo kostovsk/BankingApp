@@ -4,32 +4,35 @@ let transaction = [];
 var url = document.URL;
 var myid = url.substring(url.lastIndexOf('/') + 1);
 const acctId = parseInt(myid);
+var bankAcctId;
 
-const uri = ('https://localhost:44330/api/BankAccounts/' + myid);
+const uri = ('https://localhost:44330/api/BankAccounts/');
 const uri2 = ('https://localhost:44330/api/Transactions/');
 
 function getAccount() {
-    fetch(uri)
+    fetch(uri + myid)
         .then(response => response.json())
         .then(data => displayAccount(data))
         .catch(error => console.error('Unable to get account.', error));
 }
 
 function getTransactions() {
-    fetch(uri2 + myid)
+    fetch(uri2 + bankAcctId)
         .then(response => response.json())
         .then(data => displayTransactions(data))
         .catch(error => console.error('Unable to get transactions.', error))
 }
 
 function addTransaction() {
+    const type = document.getElementById('type');
     const amount = document.getElementById('amount');
     const notes = document.getElementById('notes');
 
     const trans = {
         amount: parseFloat(amount.value),
         notes: notes.value,
-        acct_Id: acctId
+        type: type.value,
+        bankAccountId: bankAcctId
     };
 
     fetch(uri2, {
@@ -41,8 +44,8 @@ function addTransaction() {
         body: JSON.stringify(trans)
     })
         .then(response => response.json())
+        .then(data => closeTransactionForm(data))
         .then(() => {
-            closeTransactionForm();
             getTransactions();
         })
         .catch(error => console.error('Unable to add transaction', error));
@@ -78,6 +81,8 @@ function displayAccount(data) {
     type.innerHTML = capitalizeFirstLetter(data.bankAccount.type);
     balance.innerHTML = data.bankAccount.balance;
     account.innerHTML = data.bankAccount.number;
+
+    bankAcctId = data.bankAccount.bankAccountId;
 }
 
 function displayTransactions(data) {
@@ -94,7 +99,7 @@ function displayTransactions(data) {
         td1.appendChild(textNode1);
 
         let td2 = tr.insertCell(1);
-        let textNode2 = document.createTextNode("Debit/Credit");
+        let textNode2 = document.createTextNode(item.type);
         td2.appendChild(textNode2);
 
         let td3 = tr.insertCell(2);
@@ -117,9 +122,18 @@ function hideTransactions() {
     document.getElementById('transactions').onclick = function () { getTransactions() };
 }
 
+function closeTransactionForm(data) {
+    if (data.type === 'credit') {
+        closeDepositTransactionForm();
+    }
+    if (data.type === 'debit') {
+        closeWithdrawalTransactionForm();
+    }
+}
+
 function openDepositTransactionForm() {
     document.getElementById('transactionForm').style.display = 'block';
-    document.getElementById('add-type').value = 'credit';
+    document.getElementById('type').value = 'credit';
     document.getElementById('deposit').onclick = function () { closeDepositTransactionForm() };
 }
 
@@ -130,7 +144,7 @@ function closeDepositTransactionForm() {
 
 function openWithdrawalTransactionForm() {
     document.getElementById('transactionForm').style.display = 'block';
-    document.getElementById('add-type').value = 'debit';
+    document.getElementById('type').value = 'debit';
     document.getElementById('withdrawal').onclick = function () { closeWithdrawalTransactionForm() };
 }
 
