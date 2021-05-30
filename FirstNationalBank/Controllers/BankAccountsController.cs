@@ -37,31 +37,31 @@ namespace FirstNationalBank.Controllers
          return await _context.Persons.ToListAsync();
       }
 
-        // GET: api/BankAccounts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<WrapperForAPIRequest>> GetBankAccount(int id)
-        {
-            var acct = new WrapperForAPIRequest();
-            acct.bankAccount = await _context.BankAccounts
-               .SingleAsync(x => x.BankAccountId == id);
+      // GET: api/BankAccounts/5
+      [HttpGet("{id}")]
+      public async Task<ActionResult<WrapperForAPIRequest>> GetBankAccount(int id)
+      {
+         var acct = new WrapperForAPIRequest();
+         acct.bankAccount = await _context.BankAccounts
+            .SingleAsync(x => x.BankAccountId == id);
 
-            if (acct == null)
-            {
-                return NotFound();
-            }
+         if (acct == null)
+         {
+            return NotFound();
+         }
 
          return acct;
       }
 
-        // PUT: api/BankAccounts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBankAccount(int id, BankAccount bankAccount)
-        {
-            if (id != bankAccount.BankAccountId)
-            {
-                return BadRequest();
-            }
+      // PUT: api/BankAccounts/5
+      // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+      [HttpPut("{id}")]
+      public async Task<IActionResult> PutBankAccount(int id, BankAccount bankAccount)
+      {
+         if (id != bankAccount.BankAccountId)
+         {
+            return BadRequest();
+         }
 
          _context.Entry(bankAccount).State = EntityState.Modified;
 
@@ -91,10 +91,9 @@ namespace FirstNationalBank.Controllers
       {
          var exists = await _context.Persons.Where(x => x.Email == newAccount.person.Email).FirstOrDefaultAsync();
 
-            if (exists != null && exists.PersonId > 0)
-            {
-
-                //TODO: person for the given name, exists in DB
+         if (exists != null && exists.PersonId > 0)
+         {
+            //TODO: person for the given name, exists in DB
 
             //return error'
             return StatusCode(StatusCodes.Status500InternalServerError,
@@ -102,17 +101,13 @@ namespace FirstNationalBank.Controllers
          }
          else
          {
+            _context.Persons.Add(newAccount.person);
+            newAccount.bankAccount.PersonId = newAccount.person.PersonId;
+            _context.BankAccounts.Add(newAccount.bankAccount);
+            await _context.SaveChangesAsync();
 
-
-                _context.Persons.Add(newAccount.person);
-                await _context.SaveChangesAsync();
-
-
-
-                return CreatedAtAction("GetBankAccount", new { id = newAccount.bankAccount.BankAccountId }, newAccount.bankAccount);
-
+            return CreatedAtAction("GetPerson", new { id = newAccount.person.PersonId }, newAccount.person);
          }
-
       }
 
       // DELETE: api/BankAccounts/5
@@ -131,9 +126,9 @@ namespace FirstNationalBank.Controllers
          return NoContent();
       }
 
-        private bool BankAccountExists(int id)
-        {
-            return _context.BankAccounts.Any(e => e.BankAccountId == id);
-        }
-    }
+      private bool BankAccountExists(int id)
+      {
+         return _context.BankAccounts.Any(e => e.BankAccountId == id);
+      }
+   }
 }
