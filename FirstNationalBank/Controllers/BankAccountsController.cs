@@ -103,10 +103,12 @@ namespace FirstNationalBank.Controllers
          {
             _context.Persons.Add(newAccount.person);
             newAccount.bankAccount.PersonId = newAccount.person.PersonId;
-            _context.BankAccounts.Add(newAccount.bankAccount);
+            newAccount.person.BankAccounts = new List<BankAccount>() { };
+            newAccount.person.BankAccounts.Add(newAccount.bankAccount);
+            //_context.BankAccounts.Add(newAccount.bankAccount);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPerson", new { id = newAccount.person.PersonId }, newAccount.person);
+            return CreatedAtAction("GetBankAccount", new { id = newAccount.person.PersonId }, newAccount.person);
          }
       }
 
