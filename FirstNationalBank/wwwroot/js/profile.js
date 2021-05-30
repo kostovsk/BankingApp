@@ -49,19 +49,35 @@ function addTransaction() {
 }
 
 function displayAccount(data) {
-    const account = document.getElementById('add-account');
-    const name = document.getElementById('add-name');
+    const firstName = document.getElementById('add-first-name');
+    const lastName = document.getElementById('add-last-name');
     const address = document.getElementById('add-address');
+    const city = document.getElementById('add-city');
+    const state = document.getElementById('add-state');
+    const zip = document.getElementById('add-zip');
     const phone = document.getElementById('add-phone');
     const email = document.getElementById('add-email');
-    const balance = document.getElementById('add-balance');
+    const mmn = document.getElementById('add-mmn');
 
-    account.innerHTML = data.bankAccount.number;
-    name.innerHTML = data.person.name;
+    const type = document.getElementById('acct-type');
+    const balance = document.getElementById('add-balance');
+    const account = document.getElementById('add-account');
+
+    firstName.innerHTML = data.person.firstName;
+    lastName.innerHTML = data.person.lastName;
     address.innerHTML = data.person.address;
-    phone.innerHTML = data.person.phone;
+    city.innerHTML = data.person.city + ',';
+    state.innerHTML = data.person.state + ',';
+    zip.innerHTML = data.person.zip;
+    document.getElementById('phone-icon').className = 'fa fa-phone';
+    phone.innerHTML = formatPhoneNumber(data.person.phone);
+    document.getElementById('email-icon').className = 'fa fa-envelope';
     email.innerHTML = data.person.email;
+    mmn.innerHTML = 'Inquiry Code: ' + data.person.mmn;
+
+    type.innerHTML = capitalizeFirstLetter(data.bankAccount.type);
     balance.innerHTML = data.bankAccount.balance;
+    account.innerHTML = data.bankAccount.number;
 }
 
 function displayTransactions(data) {
@@ -121,4 +137,16 @@ function openWithdrawalTransactionForm() {
 function closeWithdrawalTransactionForm() {
     document.getElementById('transactionForm').style.display = 'none';
     document.getElementById('withdrawal').onclick = function () { openWithdrawalTransactionForm() };
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function formatPhoneNumber(string) {
+    var areaCode = string.slice(0, 3);
+    var middleThree = string.slice(3, 6);
+    var lastFour = string.slice(6, 10);
+
+    return ('(' + areaCode + ')' + ' ' + middleThree + '-' + lastFour);
 }

@@ -42,8 +42,10 @@ namespace FirstNationalBank.Controllers
       public async Task<ActionResult<WrapperForAPIRequest>> GetBankAccount(int id)
       {
          var acct = new WrapperForAPIRequest();
+         acct.person = await _context.Persons
+            .SingleAsync(x => x.PersonId == id);
          acct.bankAccount = await _context.BankAccounts
-            .SingleAsync(x => x.BankAccountId == id);
+            .SingleAsync(x => x.PersonId == id);
 
          if (acct == null)
          {

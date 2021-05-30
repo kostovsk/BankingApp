@@ -4,20 +4,33 @@
 }
 
 <link rel="stylesheet" href="~/css/profile.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="sidebar">
     <div>
-        <a id="add-name"></a>
-        <a id="add-address"></a>
-        <a id="add-phone"></a>
-        <a id="add-email"></a>
+        <label id="add-first-name"></label>
+        <label id="add-last-name"></label><br />
+        <label id="add-address"></label><br />
+        <label id="add-city"></label>
+        <label id="add-state"></label>
+        <label id="add-zip"></label><br />
+        <i id="phone-icon"></i>
+        <label id="add-phone"></label><br />
+        <i id="email-icon"></i>
+        <label id="add-email"></label>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div>
+        <label id="add-mmn"></label>
     </div>
 </div>
 
 <div class="main">
     <h2>Welcome to your Account!</h2>
     <div class="header">
-        <h4>Account Number: <a id="add-account"></a></h4>
+        <h4><a id="acct-type"></a> Account Number: <a id="add-account"></a></h4>
     </div>
 
     <div style="display: inline-block">
@@ -38,7 +51,7 @@
     <br />
     <div id="transactionForm" style="display:none; max-width:220px;">
         <form action="javascript:void(0);" method="POST" onsubmit="addTransaction()" style="display:flex; flex-direction:column;">
-            <input type="hidden" value="credit" id="add-type" />
+            <input type="hidden" value="" id="add-type" />
             <label>Amount: </label>
             <input type="text" id="amount"><br />
             <label>Notes: </label>
