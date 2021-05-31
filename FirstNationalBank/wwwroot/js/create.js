@@ -85,7 +85,8 @@ function redirectToProfilePage(data) {
     account.value = '';
     balance.value = '';
 
-    window.location.replace('https://localhost:44330/Profile/ProfilePage/' + data.personId);
+    //window.location.replace('https://localhost:44330/Profile/ProfilePage/' + data.personId);
+    document.location = 'Profile/ProfilePage/' + data.personId;
 }
 
 function test() {

@@ -30,7 +30,7 @@ function verifyUser(data) {
             user = true;
             if (item.password === password.value) {
                 pass = true;
-                id = item.acct_Id
+                id = item.personId;
             }
         }
     });

@@ -1,10 +1,11 @@
 ﻿body {
+    margin: 0;
     font-family: "Lato", sans-serif;
 }
 
 .sidebar {
     width: 200px;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     top: 100px;
     left: 10px;
@@ -16,6 +17,7 @@
     .sidebar a {
         padding: 6px 8px 6px 16px;
         text-decoration: none;
+        float:left;
         font-size: 16px;
         color: #2196F3;
         display: block;
@@ -29,20 +31,24 @@
     display: block;
 }
 
-.main {
-    margin-left: 200px;
-    width: 100%;
+.main-profile {
+    margin-left: 220px;
+    width: 80%;
     padding: 0px 10px;
 }
 
 table {
+    border-collapse: collapse;
     table-layout: auto;
-    width: 80%;
+    width: 85%;
 }
 
-th,
-td {
+td, th {
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid #dddddd;
     border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }

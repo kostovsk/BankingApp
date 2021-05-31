@@ -90,6 +90,7 @@ function displayTransactions(data) {
     document.getElementById('transactions').onclick = function () { hideTransactions() };
 
     const tBody = document.getElementById('transaction');
+    tBody.innerHTML = '';
 
     data.forEach(item => {
         let tr = tBody.insertRow();
@@ -138,6 +139,8 @@ function openDepositTransactionForm() {
 }
 
 function closeDepositTransactionForm() {
+    document.getElementById('amount').value = '';
+    document.getElementById('notes').value = '';
     document.getElementById('transactionForm').style.display = 'none';
     document.getElementById('deposit').onclick = function () { openDepositTransactionForm() };
 }
@@ -149,6 +152,8 @@ function openWithdrawalTransactionForm() {
 }
 
 function closeWithdrawalTransactionForm() {
+    document.getElementById('amount').value = '';
+    document.getElementById('notes').value = '';
     document.getElementById('transactionForm').style.display = 'none';
     document.getElementById('withdrawal').onclick = function () { openWithdrawalTransactionForm() };
 }
