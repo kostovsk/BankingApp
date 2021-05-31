@@ -20,6 +20,9 @@ function getTransactions() {
     fetch(uri2 + bankAcctId)
         .then(response => response.json())
         .then(data => displayTransactions(data))
+        .then(() => {
+            getAccount();
+        })
         .catch(error => console.error('Unable to get transactions.', error))
 }
 

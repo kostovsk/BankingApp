@@ -88,6 +88,15 @@ namespace FirstNationalBank
 
          var bankAccount = await _context.BankAccounts.FindAsync(id);
          bankAccount.Transactions = new List<Transaction>() { };
+
+         if (transaction.Type.Equals("credit"))
+         {
+            bankAccount.Balance = bankAccount.Balance + transaction.Amount;
+         }
+         else if (transaction.Type.Equals("debit"))
+         {
+            bankAccount.Balance = bankAccount.Balance - transaction.Amount;
+         }
          bankAccount.Transactions.Add(transaction);
 
          await _context.SaveChangesAsync();
