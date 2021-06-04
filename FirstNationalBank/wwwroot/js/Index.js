@@ -20,9 +20,20 @@ function getPerson() {
 function verifyUser(data) {
     var email = document.getElementById('email');
     var password = document.getElementById('password');
+    var emailREGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var passwordREGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     var user = false;
     var pass = false;
     var id = -1;
+
+    if (!emailREGEX.test(email)) {
+        alert("The input needs to be an email");
+        return false;
+    }
+    if (!passwordREGEX.test(password)) {
+        alert("The password needs to contain at least one number and one special character");
+        return false;
+    }
 
     // TODO validate email then nest another if statement to check password
     data.forEach(item => {
