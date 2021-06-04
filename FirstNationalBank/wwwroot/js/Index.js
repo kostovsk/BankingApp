@@ -26,11 +26,11 @@ function verifyUser(data) {
     var pass = false;
     var id = -1;
 
-    if (!emailREGEX.test(email)) {
+    if (!emailREGEX.test(email.value)) {
         alert("The input needs to be an email");
         return false;
     }
-    if (!passwordREGEX.test(password)) {
+    if (!passwordREGEX.test(password.value)) {
         alert("The password needs to contain at least one number and one special character");
         return false;
     }
