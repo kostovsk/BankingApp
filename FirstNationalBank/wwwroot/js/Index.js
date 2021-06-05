@@ -1,7 +1,7 @@
 ﻿const uri = 'https://localhost:44330/api/BankAccounts';
 
 function openInputField() {
-    var loginForm = document.getElementById('login-form');
+    var loginForm = document.getElementById('login-form-btn');
     loginForm.setAttribute('type', 'hidden');
 
     var createUserBtn = document.getElementById('create-btn');

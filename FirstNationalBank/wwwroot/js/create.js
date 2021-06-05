@@ -18,6 +18,7 @@ var zipREGEX = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
 var phoneREGEX = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
 var emailREGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 var passwordREGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+var accountREGEX = /^\d+$/;
 
 function addAccount() {
     if (!zipREGEX.test(zip.value)) {
@@ -34,6 +35,10 @@ function addAccount() {
     }
     if (!passwordREGEX.test(password.value)) {
         alert("The password needs to contain at least one number and one special character");
+        return false;
+    }
+    if (!accountREGEX.text(account.value)) {
+        alert("The account number must contain only numbers");
         return false;
     }
 

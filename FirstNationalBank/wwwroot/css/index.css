@@ -1,0 +1,38 @@
+﻿.videoDIV {
+    width: 100%;
+    max-width: max-content;
+    height: 100%;
+    max-height: max-content;
+    margin: auto;
+    display: block;
+    position: relative;
+}
+
+.indexBody {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.main-login-create-btn {
+    width: 160px;
+    font-size: 16px;
+    background: transparent;
+    border: outset;
+    color: #e7e7e7;
+    cursor: pointer;
+}
+
+.login-btn {
+    font-size: 16px;
+    background: transparent;
+    border: outset;
+    color: #e7e7e7;
+    cursor: pointer;
+}
