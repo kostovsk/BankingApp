@@ -1,4 +1,5 @@
-﻿const uri = 'https://localhost:44330/api/BankAccounts';
+﻿var mainURL = window.location.origin;
+const uri = mainURL + '/api/BankAccounts';
 
 const firstName = document.getElementById('add-first-name');
 const lastName = document.getElementById('add-last-name');

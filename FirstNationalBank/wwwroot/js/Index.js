@@ -1,4 +1,4 @@
-﻿const uri = 'https://localhost:44330/api/BankAccounts';
+﻿const uri = 'api/BankAccounts';
 
 function openInputField() {
     var loginForm = document.getElementById('login-form-btn');
@@ -61,9 +61,9 @@ function verifyUser(data) {
 }
 
 function redirectToProfilePage(id) {
-    document.location = 'Profile/ProfilePage/' + id;
+    window.location.href = 'Profile/ProfilePage/' + id;
 }
 
 function redirectToCreateAccount() {
-    document.location = 'Create/CreateAccount';
+    window.location.href = 'Create/CreateAccount';
 }

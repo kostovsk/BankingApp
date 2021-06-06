@@ -1,13 +1,13 @@
-﻿const nope = 'https://localhost:44330/api/BankAccounts';
-let transaction = [];
+﻿let transaction = [];
 
 var url = document.URL;
 var myid = url.substring(url.lastIndexOf('/') + 1);
 const acctId = parseInt(myid);
 var bankAcctId;
+var mainURL = window.location.origin;
 
-const uri = ('https://localhost:44330/api/BankAccounts/');
-const uri2 = ('https://localhost:44330/api/Transactions/');
+const uri = mainURL + '/api/BankAccounts/';
+const uri2 = mainURL + '/api/Transactions/';
 
 function getAccount() {
     fetch(uri + myid)
