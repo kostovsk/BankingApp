@@ -172,3 +172,7 @@ function formatPhoneNumber(string) {
 
     return ('(' + areaCode + ')' + ' ' + middleThree + '-' + lastFour);
 }
+
+function redirectToEditAccount() {
+    window.location.href = 'Edit/EditAccount/' + acctId;
+}

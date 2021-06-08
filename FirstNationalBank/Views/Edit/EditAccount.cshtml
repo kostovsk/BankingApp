@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "CreateAccount";
+}
+
+<div style="background-image: url('https://image.shutterstock.com/shutterstock/photos/748798912/display_1500/stock-photo-business-office-building-lobby-blur-background-of-bank-reception-hall-customer-or-patient-counter-748798912.jpg');
+       background-repeat: no-repeat;
+       background-size: cover;">
+    <div style="max-width:40rem;
+            margin: 0 auto;">
+
+        <h1>Edit Account</h1>
+        <br />
+        <div id="inputForm">
+            <form action="javascript:void(0);"
+                  method="POST"
+                  onsubmit=""
+                  style="display: flex; flex-direction: column;">
+                <div id="name" style="display: flex; flex-direction: row;">
+                    <label>First name: </label>
+                    <input type="text" id="edit-first-name" />
+                    <label>Last name: </label>
+                    <input type="text" id="edit-last-name" /><br />
+                </div>
+                <label>Address: </label>
+                <input type="text" id="edit-address" /><br />
+                <div id="city-state-zip" style="display: flex; flex-direction: row;">
+                    <label>City: </label>
+                    <input type="text" id="edit-city" />
+                    <label>State: </label>
+                    <input type="text" id="edit-state" />
+                    <label>ZIP: </label>
+                    <input type="text" id="edit-zip" />
+                </div><br />
+                <label>Mother's maiden name</label>
+                <input type="text" id="edit-mmn" /><br />
+                <div id="phone-email" style="display: flex; flex-direction: row;">
+                    <label>Phone: </label>
+                    <input type="text" id="edit-phone" />
+                    <label>Email: </label>
+                    <input type="text" id="edit-email" />
+                </div><br />
+                <div id="account-info" style="display: flex; flex-direction: row;">
+                    <label>Account type: </label>
+                    <select name="acct-type" id="edit-type">
+                        <option value="checking">Checking</option>
+                        <option value="savings">Savings</option>
+                    </select><br />
+                    <label>Bank Account: </label>
+                    <input type="text" id="edit-account" /><br />
+                </div>
+                <label>Password: </label>
+                <input type="text" id="edit-password" /><br />
+                <div id="update-delete-btn" style="display: flex; flex-direction: row;">
+                    <button type="submit" id="update-btn" onclick="">Update</button>
+                    <button type="submit" id="delete-btn" onclick="">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/edit.js" asp-append-version="true"></script>
