@@ -2,10 +2,10 @@
 
 function openInputField() {
     var loginForm = document.getElementById('login-form-btn');
-    loginForm.setAttribute('type', 'hidden');
+    loginForm.style.display = 'none';
 
     var createUserBtn = document.getElementById('create-btn');
-    createUserBtn.setAttribute('type', 'hidden');
+    createUserBtn.style.display = 'none';
 
     document.getElementById('loginForm').style.display = 'block';
 }
@@ -35,7 +35,6 @@ function verifyUser(data) {
         return false;
     }
 
-    // TODO validate email then nest another if statement to check password
     data.forEach(item => {
         if (item.email === email.value) {
             user = true;

@@ -13,22 +13,22 @@
 
     <div class="indexBody" id="indexBody">
         <div id="login">
-            <input type="submit" class="main-login-create-btn" value="Log In" id="login-form-btn" onclick="openInputField()"/>
+            <button type="submit" class="main-login-create-btn" value="Log In" id="login-form-btn" onclick="openInputField()">Log In</button>
             <div id="loginForm" style="display:none; max-width: 15rem; text-align: center; margin: auto;">
                 <form action="javascript:void(0);" method="POST" onsubmit="getPerson()" style="display: flex; flex-direction: column;">
                     <label style="color: white;">Email: </label>
                     <input type="text" id="email" style="
                         background-color: rgba(255, 255, 255, 0.5)"><br />
                     <label style="color: white;">Password: </label>
-                    <input type="text" id="password" style="
+                    <input type="password" id="password" style="
                         background-color: rgba(255, 255, 255, 0.5)"><br />
-                    <input type="submit" class="login-btn" id="login-btn" value="Log In"/>
+                    <button type="submit" class="login-btn" id="login-btn" value="Log In">Log In</button>
                 </form>
             </div>
         </div>
         <br />
         <div id="createUser">
-            <input type="submit" class="main-login-create-btn" value="Create User" id="create-btn" onclick="redirectToCreateAccount()"/>
+            <button type="submit" class="main-login-create-btn" value="Create User" id="create-btn" onclick="redirectToCreateAccount()">Create</button>
         </div>
     </div>
 </div>
