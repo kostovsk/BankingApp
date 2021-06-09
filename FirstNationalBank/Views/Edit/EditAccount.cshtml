@@ -3,62 +3,193 @@
     ViewData["Title"] = "CreateAccount";
 }
 
+
+<style>
+    input[type=text], select, textarea {
+        width: 75%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    button[type=submit] {
+        background-color: #D3D3D3;
+        color: black;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+
+    button[type=submit]:hover {
+        background-color: #696969;
+    }
+
+    .floated {
+        float: left;
+        margin-right: 5px; 
+    }
+
+    .edit-container {
+        border-radius: 5px;
+        max-width: 50%;
+        margin: 0 auto;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+
+    .row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    @@media screen and (max-width: 600px) {
+        .col-25, .col-75, input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+</style>
+
 <div style="background-image: url('https://image.shutterstock.com/shutterstock/photos/748798912/display_1500/stock-photo-business-office-building-lobby-blur-background-of-bank-reception-hall-customer-or-patient-counter-748798912.jpg');
        background-repeat: no-repeat;
        background-size: cover;">
-    <div style="max-width:40rem;
-            margin: 0 auto;">
 
         <h1>Edit Account</h1>
         <br />
-        <div id="inputForm">
-            <form action="javascript:void(0);"
-                  method="POST"
-                  onsubmit=""
-                  style="display: flex; flex-direction: column;">
-                <div id="name" style="display: flex; flex-direction: row;">
-                    <label>First name: </label>
-                    <input type="text" id="edit-first-name" />
-                    <label>Last name: </label>
-                    <input type="text" id="edit-last-name" /><br />
+        <div class="edit-container">
+            <form action="javascript:void(0);" method="POST" onsubmit="">
+                <div class="row">
+                    <div class="col-25">
+                        <label>First name: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-first-name" />
+                    </div>
                 </div>
-                <label>Address: </label>
-                <input type="text" id="edit-address" /><br />
-                <div id="city-state-zip" style="display: flex; flex-direction: row;">
-                    <label>City: </label>
-                    <input type="text" id="edit-city" />
-                    <label>State: </label>
-                    <input type="text" id="edit-state" />
-                    <label>ZIP: </label>
-                    <input type="text" id="edit-zip" />
-                </div><br />
-                <label>Mother's maiden name</label>
-                <input type="text" id="edit-mmn" /><br />
-                <div id="phone-email" style="display: flex; flex-direction: row;">
-                    <label>Phone: </label>
-                    <input type="text" id="edit-phone" />
-                    <label>Email: </label>
-                    <input type="text" id="edit-email" />
-                </div><br />
-                <div id="account-info" style="display: flex; flex-direction: row;">
-                    <label>Account type: </label>
-                    <select name="acct-type" id="edit-type">
-                        <option value="checking">Checking</option>
-                        <option value="savings">Savings</option>
-                    </select><br />
-                    <label>Bank Account: </label>
-                    <input type="text" id="edit-account" /><br />
+                <div class="row">
+                    <div class="col-25">
+                        <label>Last name: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-last-name" />
+                    </div>
                 </div>
-                <label>Password: </label>
-                <input type="text" id="edit-password" /><br />
-                <div id="update-delete-btn" style="display: flex; flex-direction: row;">
-                    <button type="submit" id="update-btn" onclick="">Update</button>
-                    <button type="submit" id="delete-btn" onclick="">Delete</button>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Address: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-address" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>City: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-city" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>State: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-state" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>ZIP: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-zip" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Mother's maiden name: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-mmn" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Phone: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-phone" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Email: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-email" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Account type: </label>
+                    </div>
+                    <div class="col-75">
+                        <select name="acct-type" id="edit-type">
+                            <option value="checking">Checking</option>
+                            <option value="savings">Savings</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Bank Account: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-account" /><br />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-25">
+                        <label>Password: </label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="edit-password" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <button type="submit" class="floated" id="update-btn" onclick="">Update</button>
+                    <button type="submit" class="floated" id="delete-btn" onclick="">Delete</button>
                 </div>
             </form>
         </div>
     </div>
-</div>
 
 
 <script src="~/js/edit.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    getAccount();
+</script>

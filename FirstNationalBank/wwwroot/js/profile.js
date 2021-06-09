@@ -174,5 +174,5 @@ function formatPhoneNumber(string) {
 }
 
 function redirectToEditAccount() {
-    window.location.href = 'Edit/EditAccount/' + acctId;
+    window.location.href = mainURL + '/Edit/EditAccount/' + acctId;
 }
