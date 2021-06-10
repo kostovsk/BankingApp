@@ -95,7 +95,7 @@ function displayTransactions(data) {
     const tBody = document.getElementById('transaction');
     tBody.innerHTML = '';
 
-    data.forEach(item => {
+    data.reverse().forEach(item => {
         let tr = tBody.insertRow();
 
         let td1 = tr.insertCell(0);
@@ -107,7 +107,7 @@ function displayTransactions(data) {
         td2.appendChild(textNode2);
 
         let td3 = tr.insertCell(2);
-        let textNode3 = document.createTextNode(parseFloat(item.amount));
+        let textNode3 = document.createTextNode(parseFloat(item.amount).toFixed(2));
         td3.appendChild(textNode3);
 
         let td4 = tr.insertCell(3);
