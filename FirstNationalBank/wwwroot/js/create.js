@@ -38,7 +38,7 @@ function addAccount() {
         alert("The password needs to contain at least one number and one special character");
         return false;
     }
-    if (!accountREGEX.text(account.value)) {
+    if (!accountREGEX.test(account.value)) {
         alert("The account number must contain only numbers");
         return false;
     }

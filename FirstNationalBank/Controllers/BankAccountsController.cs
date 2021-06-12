@@ -58,14 +58,15 @@ namespace FirstNationalBank.Controllers
       // PUT: api/BankAccounts/5
       // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
       [HttpPut("{id}")]
-      public async Task<IActionResult> PutBankAccount(int id, BankAccount bankAccount)
+      public async Task<IActionResult> PutBankAccount(int id, WrapperForAPIRequest updatedAccount)
       {
-         if (id != bankAccount.BankAccountId)
+         if (id != updatedAccount.person.PersonId)
          {
             return BadRequest();
          }
 
-         _context.Entry(bankAccount).State = EntityState.Modified;
+         _context.Entry(updatedAccount.person).State = EntityState.Modified;
+         _context.Entry(updatedAccount.bankAccount).State = EntityState.Modified;
 
          try
          {
@@ -73,7 +74,7 @@ namespace FirstNationalBank.Controllers
          }
          catch (DbUpdateConcurrencyException)
          {
-            if (!BankAccountExists(id))
+            if (!PersonExists(id))
             {
                return NotFound();
             }
@@ -130,9 +131,9 @@ namespace FirstNationalBank.Controllers
          return NoContent();
       }
 
-      private bool BankAccountExists(int id)
+      private bool PersonExists(int id)
       {
-         return _context.BankAccounts.Any(e => e.BankAccountId == id);
+         return _context.Persons.Any(e => e.PersonId == id);
       }
    }
 }
