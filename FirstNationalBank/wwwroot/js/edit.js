@@ -18,7 +18,7 @@ const password = document.getElementById('edit-password');
 const type = document.getElementById('edit-type');
 const account = document.getElementById('edit-account');
 
-var zipREGEX = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
+var zipREGEX = /^\d{5}$/;
 var phoneREGEX = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
 var emailREGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 var passwordREGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -44,4 +44,8 @@ function displayAccount(data) {
     password.value = data.person.password;
 
     account.value = data.bankAccount.number;
+}
+
+function goToProfilePage() {
+    window.location.href = mainURL + '/Profile/ProfilePage/' + acctId;
 }

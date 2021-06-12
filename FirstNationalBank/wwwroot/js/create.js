@@ -15,7 +15,7 @@ const type = document.getElementById('add-type');
 const account = document.getElementById('add-account');
 const balance = document.getElementById('add-balance');
 
-var zipREGEX = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
+var zipREGEX = /^\d{5}$/;
 var phoneREGEX = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
 var emailREGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 var passwordREGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -100,6 +100,10 @@ function redirectToProfilePage(data) {
 
     //window.location.replace('https://localhost:44330/Profile/ProfilePage/' + data.personId);
     document.location = 'Profile/ProfilePage/' + data.personId;
+}
+
+function goToHomePage() {
+    window.location.href = mainURL;
 }
 
 function test() {
