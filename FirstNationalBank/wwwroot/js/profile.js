@@ -82,7 +82,7 @@ function displayAccount(data) {
     mmn.innerHTML = 'Inquiry Code: ' + data.person.mmn;
 
     type.innerHTML = capitalizeFirstLetter(data.bankAccount.type);
-    balance.innerHTML = data.bankAccount.balance;
+    balance.innerHTML = parseFloat(data.bankAccount.balance).toFixed(2);
     account.innerHTML = data.bankAccount.number;
 
     bankAcctId = data.bankAccount.bankAccountId;
