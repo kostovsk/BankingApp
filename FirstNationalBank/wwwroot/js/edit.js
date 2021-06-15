@@ -98,6 +98,14 @@ function updateAccount() {
         .catch(error => console.error('Unable to update item.', error));
 }
 
+function deleteAccount(acctId) {
+    fetch(`${uri}${acctId}`, {
+        method: 'DELETE'
+    })
+        .then(() => goToHomePage())
+        .catch(error => console.error('Unable to delete account.', error))
+}
+
 function displayAccount(data) {
     firstName.value = data.person.firstName;
     lastName.value = data.person.lastName;
@@ -120,4 +128,8 @@ function displayAccount(data) {
 
 function goToProfilePage() {
     window.location.href = mainURL + '/Profile/ProfilePage/' + acctId;
+}
+
+function goToHomePage() {
+    window.location.href = mainURL;
 }

@@ -119,13 +119,32 @@ namespace FirstNationalBank.Controllers
       [HttpDelete("{id}")]
       public async Task<IActionResult> DeleteBankAccount(int id)
       {
-         var bankAccount = await _context.BankAccounts.FindAsync(id);
+         var person = await _context.Persons.FindAsync(id);
+         if (person == null)
+         {
+            return NotFound();
+         }
+
+         var bankAccount = await _context.BankAccounts
+            .SingleAsync(x => x.PersonId == id);
          if (bankAccount == null)
          {
             return NotFound();
          }
 
+         var bankAccountID = bankAccount.BankAccountId;
+
+         var transactions = _context.Transactions
+            .Where(y => y.BankAccountId == bankAccountID)
+            .ToListAsync();
+
+         foreach (var item in await transactions)
+         {
+            _context.Transactions.Remove(item);
+         }
+
          _context.BankAccounts.Remove(bankAccount);
+         _context.Persons.Remove(person);
          await _context.SaveChangesAsync();
 
          return NoContent();
