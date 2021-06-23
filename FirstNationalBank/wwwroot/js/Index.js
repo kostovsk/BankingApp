@@ -1,5 +1,13 @@
 ﻿const uri = 'api/BankAccounts';
 
+var input = document.getElementById('password');
+input.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById('login-btn').click();
+    }
+});
+
 function openInputField() {
     var loginForm = document.getElementById('login-form-btn');
     loginForm.style.display = 'none';

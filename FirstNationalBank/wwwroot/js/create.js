@@ -15,6 +15,7 @@ const type = document.getElementById('add-type');
 const account = document.getElementById('add-account');
 const balance = document.getElementById('add-balance');
 
+var nameREGEX = /<(.|\n)*?>/;
 var zipREGEX = /^\d{5}$/;
 var phoneREGEX = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
 var emailREGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -22,6 +23,14 @@ var passwordREGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 var accountREGEX = /^\d+$/;
 
 function addAccount() {
+    if (firstName.value.replace(nameREGEX, "").trim().length === 0) {
+        alert("Name cannot be blank");
+        return false;
+    }
+    if (lastName.value.replace(nameREGEX, "").trim().length === 0) {
+        alert("Name cannot be blank");
+        return false;
+    }
     if (!zipREGEX.test(zip.value)) {
         alert("The Zip code is invalid");
         return false;

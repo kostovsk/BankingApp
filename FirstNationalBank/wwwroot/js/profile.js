@@ -176,3 +176,7 @@ function formatPhoneNumber(string) {
 function redirectToEditAccount() {
     window.location.href = mainURL + '/Edit/EditAccount/' + acctId;
 }
+
+function logOut() {
+    window.location.href = mainURL;
+}
